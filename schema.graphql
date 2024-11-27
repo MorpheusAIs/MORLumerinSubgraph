@@ -1,0 +1,19 @@
+type Provider @entity {
+  "The provider address"
+  id: Bytes!
+  "The provider endpoint"
+  endpoint: String!
+  "The provider staked amount"
+  stake: BigInt!
+}
+
+type DelegateContract @entity {
+  "id forms from `from` + `to` + `rules`"
+  id: Bytes!
+  "Delegate rules from"
+  from: Bytes!
+  "Delegate rules to"
+  to: Bytes!
+  "Rights"
+  rights: Bytes!
+}

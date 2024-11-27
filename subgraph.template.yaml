@@ -1,0 +1,49 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: ProviderRegistry
+    network: "{{ network }}"
+    source:
+      address: "{{ providerRegistry }}"
+      abi: ProviderRegistry
+      startBlock: {{ providerRegistryStartBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Provider
+      abis:
+        - name: ProviderRegistry
+          file: ./abis/ProviderRegistry.json
+      eventHandlers:
+        - event: ProviderRegistered(indexed address)
+          handler: handleProviderRegisteredEvent
+        - event: ProviderDeregistered(indexed address)
+          handler: handleProviderDeregisteredEvent
+      file: ./src/mappings/provider-registry.ts
+  
+  - kind: ethereum
+    name: DelegateRegistry
+    network: "{{ network }}"
+    source:
+      address: "{{ delegateRegistry }}"
+      abi: DelegateRegistry
+      startBlock: {{ delegateRegistryStartBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - DelegateContract
+      abis:
+        - name: DelegateRegistry
+          file: ./abis/DelegateRegistry.json
+      eventHandlers:
+        - event: DelegateContract(indexed address,indexed address,indexed address,bytes32,bool)
+          handler: handleDelegateContractEvent
+      file: ./src/mappings/delegate-registry.ts

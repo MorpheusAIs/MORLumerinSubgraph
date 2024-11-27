@@ -1,0 +1,382 @@
+[
+  {
+    "inputs": [
+      { "internalType": "address", "name": "delegator", "type": "address" },
+      { "internalType": "address", "name": "delegatee", "type": "address" }
+    ],
+    "name": "InsufficientRightsForOperation",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "account_", "type": "address" }
+    ],
+    "name": "OwnableUnauthorizedAccount",
+    "type": "error"
+  },
+  { "inputs": [], "name": "ProviderHasActiveBids", "type": "error" },
+  { "inputs": [], "name": "ProviderHasAlreadyDeregistered", "type": "error" },
+  { "inputs": [], "name": "ProviderNoStake", "type": "error" },
+  { "inputs": [], "name": "ProviderNotDeregistered", "type": "error" },
+  { "inputs": [], "name": "ProviderNotFound", "type": "error" },
+  { "inputs": [], "name": "ProviderNothingToWithdraw", "type": "error" },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "amount", "type": "uint256" },
+      { "internalType": "uint256", "name": "minAmount", "type": "uint256" }
+    ],
+    "name": "ProviderStakeTooLow",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "storageSlot",
+        "type": "bytes32"
+      }
+    ],
+    "name": "Initialized",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "provider",
+        "type": "address"
+      }
+    ],
+    "name": "ProviderDeregistered",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "providerMinimumStake",
+        "type": "uint256"
+      }
+    ],
+    "name": "ProviderMinimumStakeUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "provider",
+        "type": "address"
+      }
+    ],
+    "name": "ProviderRegistered",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "provider",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "ProviderWithdrawn",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "BIDS_STORAGE_SLOT",
+    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "DELEGATION_RULES_MARKETPLACE",
+    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "DELEGATION_RULES_MODEL",
+    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "DELEGATION_RULES_PROVIDER",
+    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "DELEGATION_RULES_SESSION",
+    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "DELEGATION_STORAGE_SLOT",
+    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "DIAMOND_OWNABLE_STORAGE_SLOT",
+    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "PROVIDERS_STORAGE_SLOT",
+    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "__ProviderRegistry_init",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "offset_", "type": "uint256" },
+      { "internalType": "uint256", "name": "limit_", "type": "uint256" }
+    ],
+    "name": "getActiveProviders",
+    "outputs": [
+      { "internalType": "address[]", "name": "", "type": "address[]" },
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "bytes32", "name": "bidId_", "type": "bytes32" }
+    ],
+    "name": "getBid",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "address", "name": "provider", "type": "address" },
+          { "internalType": "bytes32", "name": "modelId", "type": "bytes32" },
+          {
+            "internalType": "uint256",
+            "name": "pricePerSecond",
+            "type": "uint256"
+          },
+          { "internalType": "uint256", "name": "nonce", "type": "uint256" },
+          { "internalType": "uint128", "name": "createdAt", "type": "uint128" },
+          { "internalType": "uint128", "name": "deletedAt", "type": "uint128" }
+        ],
+        "internalType": "struct IBidStorage.Bid",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "provider_", "type": "address" }
+    ],
+    "name": "getIsProviderActive",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "bytes32", "name": "modelId_", "type": "bytes32" },
+      { "internalType": "uint256", "name": "offset_", "type": "uint256" },
+      { "internalType": "uint256", "name": "limit_", "type": "uint256" }
+    ],
+    "name": "getModelActiveBids",
+    "outputs": [
+      { "internalType": "bytes32[]", "name": "", "type": "bytes32[]" },
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "bytes32", "name": "modelId_", "type": "bytes32" },
+      { "internalType": "uint256", "name": "offset_", "type": "uint256" },
+      { "internalType": "uint256", "name": "limit_", "type": "uint256" }
+    ],
+    "name": "getModelBids",
+    "outputs": [
+      { "internalType": "bytes32[]", "name": "", "type": "bytes32[]" },
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "provider_", "type": "address" }
+    ],
+    "name": "getProvider",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "string", "name": "endpoint", "type": "string" },
+          { "internalType": "uint256", "name": "stake", "type": "uint256" },
+          { "internalType": "uint128", "name": "createdAt", "type": "uint128" },
+          {
+            "internalType": "uint128",
+            "name": "limitPeriodEnd",
+            "type": "uint128"
+          },
+          {
+            "internalType": "uint256",
+            "name": "limitPeriodEarned",
+            "type": "uint256"
+          },
+          { "internalType": "bool", "name": "isDeleted", "type": "bool" }
+        ],
+        "internalType": "struct IProviderStorage.Provider",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "provider_", "type": "address" },
+      { "internalType": "uint256", "name": "offset_", "type": "uint256" },
+      { "internalType": "uint256", "name": "limit_", "type": "uint256" }
+    ],
+    "name": "getProviderActiveBids",
+    "outputs": [
+      { "internalType": "bytes32[]", "name": "", "type": "bytes32[]" },
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "provider_", "type": "address" },
+      { "internalType": "uint256", "name": "offset_", "type": "uint256" },
+      { "internalType": "uint256", "name": "limit_", "type": "uint256" }
+    ],
+    "name": "getProviderBids",
+    "outputs": [
+      { "internalType": "bytes32[]", "name": "", "type": "bytes32[]" },
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getProviderMinimumStake",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getRegistry",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getToken",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "bytes32", "name": "bidId_", "type": "bytes32" }
+    ],
+    "name": "isBidActive",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "delegatee_", "type": "address" },
+      { "internalType": "address", "name": "delegator_", "type": "address" },
+      { "internalType": "bytes32", "name": "rights_", "type": "bytes32" }
+    ],
+    "name": "isRightsDelegated",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "provider_", "type": "address" }
+    ],
+    "name": "providerDeregister",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "provider_", "type": "address" },
+      { "internalType": "uint256", "name": "amount_", "type": "uint256" },
+      { "internalType": "string", "name": "endpoint_", "type": "string" }
+    ],
+    "name": "providerRegister",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "providerMinimumStake_",
+        "type": "uint256"
+      }
+    ],
+    "name": "providerSetMinStake",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
