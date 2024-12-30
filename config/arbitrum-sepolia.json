@@ -2,6 +2,6 @@
     "network": "arbitrum-sepolia",
     "providerRegistry": "0xb8C55cD613af947E73E262F0d3C54b7211Af16CF",
     "providerRegistryStartBlock": "96950200",
-    "delegateRegistry": "0x00000000000000447e69651d841bD8D104Bed493",
-    "delegateRegistryStartBlock": "96950200"
+    "delegateFactory": "0xa41178368f393a224b990779baa9b5855759D45d",
+    "delegateFactoryStartBlock": "108556780"
 }

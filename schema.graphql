@@ -1,19 +1,39 @@
 type Provider @entity {
-  "The provider address"
   id: Bytes!
-  "The provider endpoint"
   endpoint: String!
-  "The provider staked amount"
   stake: BigInt!
 }
 
-type DelegateContract @entity {
-  "id forms from `from` + `to` + `rules`"
+type Subnet @entity {
   id: Bytes!
-  "Delegate rules from"
-  from: Bytes!
-  "Delegate rules to"
-  to: Bytes!
-  "Rights"
-  rights: Bytes!
+  # Metadata 
+  name: String!
+  endpoint: String!
+  createdAt: BigInt!
+  owner: Bytes!
+  # Fee
+  fee: BigInt!
+  # Deregistration info
+  deregistrationOpensAt: BigInt!
+  isDeregistered: Boolean!
+  # Metrics
+  totalStaked: BigInt!
+  totalClaimed: BigInt!
+  #
+  totalUsers: BigInt!
+}
+
+type SubnetUser @entity {
+  # Subnet ID + User address
+  id: Bytes!
+  staked: BigInt!
+  claimed: BigInt!
+
+  subnet: Subnet!
+  address: Bytes!
+}
+
+type Counter @entity {
+  id: Bytes!
+  totalSubnets: BigInt!
 }

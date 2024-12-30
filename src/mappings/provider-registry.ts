@@ -8,12 +8,12 @@ import {
 import { getProvider } from "../entities/Provider";
 
 export function handleProviderRegisteredEvent(event: ProviderRegistered): void {
-  let providerData = _callToGetProviderData(event.address, event.params.provider);
+  const providerData = _callToGetProviderData(event.address, event.params.provider);
   if (providerData === null) {
     return;
   }
 
-  let entity = getProvider(event.params.provider);
+  const entity = getProvider(event.params.provider);
   entity.stake = providerData.stake;
   entity.endpoint = providerData.endpoint;
 
@@ -21,12 +21,12 @@ export function handleProviderRegisteredEvent(event: ProviderRegistered): void {
 }
 
 export function handleProviderDeregisteredEvent(event: ProviderDeregistered): void {
-  let providerData = _callToGetProviderData(event.address, event.params.provider);
+  const providerData = _callToGetProviderData(event.address, event.params.provider);
   if (providerData === null) {
     return;
   }
 
-  let entity = getProvider(event.params.provider);
+  const entity = getProvider(event.params.provider);
   entity.stake = providerData.stake;
 
   entity.save();

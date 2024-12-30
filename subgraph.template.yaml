@@ -28,22 +28,51 @@ dataSources:
       file: ./src/mappings/provider-registry.ts
   
   - kind: ethereum
-    name: DelegateRegistry
+    name: DelegateFactory
     network: "{{ network }}"
     source:
-      address: "{{ delegateRegistry }}"
-      abi: DelegateRegistry
-      startBlock: {{ delegateRegistryStartBlock }}
+      address: "{{ delegateFactory }}"
+      abi: DelegateFactory
+      startBlock: {{ delegateFactoryStartBlock }}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - DelegateContract
+        - Subnet
       abis:
-        - name: DelegateRegistry
-          file: ./abis/DelegateRegistry.json
+        - name: DelegateFactory
+          file: ./abis/DelegateFactory.json
+        - name: ProvidersDelegate
+          file: ./abis/ProvidersDelegate.json
       eventHandlers:
-        - event: DelegateContract(indexed address,indexed address,indexed address,bytes32,bool)
-          handler: handleDelegateContractEvent
-      file: ./src/mappings/delegate-registry.ts
+        - event: ProxyDeployed(indexed address)
+          handler: handleProxyDeployed
+      file: ./src/mappings/delegator-factory.ts
+templates:
+  - kind: ethereum/contract
+    name: ProvidersDelegate
+    network: "{{ network }}"
+    source:
+      abi: ProvidersDelegate
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Subnet
+        - SubnetUser
+      abis:
+        - name: ProvidersDelegate
+          file: ./abis/ProvidersDelegate.json
+      eventHandlers:
+        - event: NameUpdated(string)
+          handler: handleNameUpdated
+        - event: EndpointUpdated(string)
+          handler: handleEndpointUpdated
+        - event: Staked(address,uint256,uint256,uint256)
+          handler: handleStaked
+        - event: Claimed(address,uint256,uint256)
+          handler: handleClaimed
+      file: ./src/mappings/providers-delegator.ts
+
