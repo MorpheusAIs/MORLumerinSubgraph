@@ -33,7 +33,30 @@ type SubnetUser @entity {
   address: Bytes!
 }
 
+type BuildersProject @entity {
+  id: Bytes!
+  name: String!
+  admin: Bytes!
+  startsAt: BigInt!
+  withdrawLockPeriodAfterDeposit: BigInt!
+  claimLockEnd: BigInt!
+  minimalDeposit: BigInt!
+  totalStaked: BigInt!
+  totalClaimed: BigInt!
+  totalUsers: BigInt!
+}
+
+type BuildersUser @entity {
+  # User address in Bytes + BuildersProject ID
+  id: Bytes!
+  address: Bytes!
+  buildersProject: BuildersProject!
+  staked: BigInt!
+  lastStake: BigInt!
+}
+
 type Counter @entity {
   id: Bytes!
   totalSubnets: BigInt!
+  totalBuildersProjects: BigInt!
 }

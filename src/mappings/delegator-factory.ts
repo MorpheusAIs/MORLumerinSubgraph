@@ -4,7 +4,7 @@ import { ProvidersDelegate as ProvidersDelegateContract } from "../../generated/
 import { ProvidersDelegate } from "../../generated/templates";
 
 import { getSubnet } from "../entities/Subnet";
-import { getCounter, increaseCounter } from "../entities/Counter";
+import { getCounter, increaseTotalSubnetsCounter } from "../entities/Counter";
 
 export function handleProxyDeployed(event: ProxyDeployed): void {
   const subnet = getSubnet(event.params.proxyAddress);
@@ -16,7 +16,7 @@ export function handleProxyDeployed(event: ProxyDeployed): void {
   subnet.save();
 
   const counter = getCounter();
-  increaseCounter(counter);
+  increaseTotalSubnetsCounter(counter);
   counter.save();
 
   ProvidersDelegate.create(event.params.proxyAddress);

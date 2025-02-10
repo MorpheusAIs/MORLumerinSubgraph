@@ -1,0 +1,9 @@
+{
+    "network": "base",
+    "providerRegistry": "0x0000000000000000000000000000000000000000",
+    "providerRegistryStartBlock": "0x0000000000000000000000000000000000000000",
+    "delegateFactory": "0x0000000000000000000000000000000000000000",
+    "delegateFactoryStartBlock": "0x0000000000000000000000000000000000000000",
+    "builders": "0x42BB446eAE6dca7723a9eBdb81EA88aFe77eF4B9",
+    "buildersStartBlock": "24381830"
+}
