@@ -33,30 +33,43 @@ type SubnetUser @entity {
   address: Bytes!
 }
 
-type BuildersProject @entity {
+type BuilderSubnet @entity {
   id: Bytes!
   name: String!
-  admin: Bytes!
+  owner: Bytes!
+  minStake: BigInt!
+  fee: BigInt!
+  feeTreasury: Bytes!
   startsAt: BigInt!
-  withdrawLockPeriodAfterDeposit: BigInt!
-  claimLockEnd: BigInt!
-  minimalDeposit: BigInt!
+  withdrawLockPeriodAfterStake: BigInt!
+  maxClaimLockEnd: BigInt!
+
+  # Metadata 
+  slug: String!
+  description: String!
+  website: String!
+  image: String!
+
+  # Statistics
   totalStaked: BigInt!
   totalClaimed: BigInt!
   totalUsers: BigInt!
+  builderUsers: [BuilderUser!]! @derivedFrom(field: "builderSubnet")
 }
 
-type BuildersUser @entity {
+type BuilderUser @entity {
   # User address in Bytes + BuildersProject ID
   id: Bytes!
   address: Bytes!
-  buildersProject: BuildersProject!
+  builderSubnet: BuilderSubnet!
   staked: BigInt!
+  claimed: BigInt!
+  claimLockEnd: BigInt!
   lastStake: BigInt!
 }
 
 type Counter @entity {
   id: Bytes!
   totalSubnets: BigInt!
-  totalBuildersProjects: BigInt!
+  totalBuilderProjects: BigInt!
 }

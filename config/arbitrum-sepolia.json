@@ -4,6 +4,6 @@
     "providerRegistryStartBlock": "96950200",
     "delegateFactory": "0xa41178368f393a224b990779baa9b5855759D45d",
     "delegateFactoryStartBlock": "108556780",
-    "builders": "0x649B24D0b6F5A4c3852fD4C0dD91308902E5fe8a",
-    "buildersStartBlock": "75449595"
+    "builders": "0xfc088c5ec4288a3B337C6b93968E521aAf06f346",
+    "buildersStartBlock": "125273700"
 }

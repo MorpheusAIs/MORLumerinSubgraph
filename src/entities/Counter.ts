@@ -10,7 +10,7 @@ export function getCounter(): Counter {
     entity = new Counter(counterId);
 
     entity.totalSubnets = BigInt.zero();
-    entity.totalBuildersProjects = BigInt.zero();
+    entity.totalBuilderProjects = BigInt.zero();
   }
 
   return entity;
@@ -22,8 +22,8 @@ export function increaseTotalSubnetsCounter(counter: Counter): Counter {
   return counter;
 }
 
-export function increaseTotalBuildersProjectsCounter(counter: Counter): Counter {
-  counter.totalBuildersProjects = counter.totalBuildersProjects.plus(BigInt.fromI32(1));
+export function increaseTotalBuilderProjectsCounter(counter: Counter): Counter {
+  counter.totalBuilderProjects = counter.totalBuilderProjects.plus(BigInt.fromI32(1));
 
   return counter;
 }
