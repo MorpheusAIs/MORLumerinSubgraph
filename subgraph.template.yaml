@@ -79,11 +79,11 @@ dataSources:
           handler: handleSubnetOwnerSet
         - event: SubnetMaxClaimLockEndSet(bytes32,uint128,uint128)
           handler: handleSubnetMaxClaimLockEndSet
-        - event: Staked(indexed bytes32,address,(uint128,uint128,uint128,uint256,uint256,uint256))
+        - event: Staked(indexed bytes32,address,(uint256,uint256,uint256,uint256,uint128,uint128))
           handler: handleStaked
-        - event: Claimed(indexed bytes32,address,(uint128,uint128,uint128,uint256,uint256,uint256),uint256)
+        - event: Claimed(indexed bytes32,address,(uint256,uint256,uint256,uint256,uint128,uint128),uint256)
           handler: handleClaimed
-        - event: Withdrawn(indexed bytes32,address,(uint128,uint128,uint128,uint256,uint256,uint256),uint256)
+        - event: Withdrawn(indexed bytes32,address,(uint256,uint256,uint256,uint256,uint128,uint128),uint256)
           handler: handleWithdrawn
         - event: FeePaid(indexed bytes32,address,uint256,address)
           handler: handleFeePaid

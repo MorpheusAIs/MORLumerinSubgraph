@@ -55,12 +55,12 @@
           { "internalType": "uint128", "name": "interval", "type": "uint128" }
         ],
         "indexed": false,
-        "internalType": "struct IBuilderSubnets.BuildersPoolData",
-        "name": "buildersPoolData",
+        "internalType": "struct IBuilderSubnets.BuildersRewardPoolData",
+        "name": "buildersRewardPoolData",
         "type": "tuple"
       }
     ],
-    "name": "BuildersPoolDataSet",
+    "name": "BuildersRewardPoolDataSet",
     "type": "event"
   },
   {
@@ -80,17 +80,6 @@
       },
       {
         "components": [
-          {
-            "internalType": "uint128",
-            "name": "lastInteraction",
-            "type": "uint128"
-          },
-          { "internalType": "uint128", "name": "lastStake", "type": "uint128" },
-          {
-            "internalType": "uint128",
-            "name": "claimLockEnd",
-            "type": "uint128"
-          },
           { "internalType": "uint256", "name": "staked", "type": "uint256" },
           {
             "internalType": "uint256",
@@ -101,6 +90,13 @@
             "internalType": "uint256",
             "name": "pendingRewards",
             "type": "uint256"
+          },
+          { "internalType": "uint256", "name": "rate", "type": "uint256" },
+          { "internalType": "uint128", "name": "lastStake", "type": "uint128" },
+          {
+            "internalType": "uint128",
+            "name": "claimLockEnd",
+            "type": "uint128"
           }
         ],
         "indexed": false,
@@ -237,7 +233,7 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": true,
+        "indexed": false,
         "internalType": "bytes32",
         "name": "subnetId",
         "type": "bytes32"
@@ -247,39 +243,9 @@
         "internalType": "address",
         "name": "stakerAddress",
         "type": "address"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint128",
-            "name": "lastInteraction",
-            "type": "uint128"
-          },
-          { "internalType": "uint128", "name": "lastStake", "type": "uint128" },
-          {
-            "internalType": "uint128",
-            "name": "claimLockEnd",
-            "type": "uint128"
-          },
-          { "internalType": "uint256", "name": "staked", "type": "uint256" },
-          {
-            "internalType": "uint256",
-            "name": "virtualStaked",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "pendingRewards",
-            "type": "uint256"
-          }
-        ],
-        "indexed": false,
-        "internalType": "struct IBuilderSubnets.Staker",
-        "name": "staker",
-        "type": "tuple"
       }
     ],
-    "name": "PendingRewardsCollected",
+    "name": "PowerFactorReset",
     "type": "event"
   },
   {
@@ -299,6 +265,32 @@
     "anonymous": false,
     "inputs": [
       {
+        "indexed": false,
+        "internalType": "uint128",
+        "name": "to",
+        "type": "uint128"
+      }
+    ],
+    "name": "RewardsCollected",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "rewards",
+        "type": "uint256"
+      }
+    ],
+    "name": "RewardsNotDistributed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
         "indexed": true,
         "internalType": "bytes32",
         "name": "subnetId",
@@ -312,17 +304,6 @@
       },
       {
         "components": [
-          {
-            "internalType": "uint128",
-            "name": "lastInteraction",
-            "type": "uint128"
-          },
-          { "internalType": "uint128", "name": "lastStake", "type": "uint128" },
-          {
-            "internalType": "uint128",
-            "name": "claimLockEnd",
-            "type": "uint128"
-          },
           { "internalType": "uint256", "name": "staked", "type": "uint256" },
           {
             "internalType": "uint256",
@@ -333,6 +314,13 @@
             "internalType": "uint256",
             "name": "pendingRewards",
             "type": "uint256"
+          },
+          { "internalType": "uint256", "name": "rate", "type": "uint256" },
+          { "internalType": "uint128", "name": "lastStake", "type": "uint128" },
+          {
+            "internalType": "uint128",
+            "name": "claimLockEnd",
+            "type": "uint128"
           }
         ],
         "indexed": false,
@@ -396,7 +384,7 @@
           }
         ],
         "indexed": false,
-        "internalType": "struct IBuilderSubnets.BuildersSubnet",
+        "internalType": "struct IBuilderSubnets.Subnet",
         "name": "subnet",
         "type": "tuple"
       }
@@ -471,7 +459,7 @@
           { "internalType": "string", "name": "image", "type": "string" }
         ],
         "indexed": false,
-        "internalType": "struct IBuilderSubnets.BuildersSubnetMetadata",
+        "internalType": "struct IBuilderSubnets.SubnetMetadata",
         "name": "subnetMetadata",
         "type": "tuple"
       }
@@ -572,17 +560,6 @@
       },
       {
         "components": [
-          {
-            "internalType": "uint128",
-            "name": "lastInteraction",
-            "type": "uint128"
-          },
-          { "internalType": "uint128", "name": "lastStake", "type": "uint128" },
-          {
-            "internalType": "uint128",
-            "name": "claimLockEnd",
-            "type": "uint128"
-          },
           { "internalType": "uint256", "name": "staked", "type": "uint256" },
           {
             "internalType": "uint256",
@@ -593,6 +570,13 @@
             "internalType": "uint256",
             "name": "pendingRewards",
             "type": "uint256"
+          },
+          { "internalType": "uint256", "name": "rate", "type": "uint256" },
+          { "internalType": "uint128", "name": "lastStake", "type": "uint128" },
+          {
+            "internalType": "uint128",
+            "name": "claimLockEnd",
+            "type": "uint128"
           }
         ],
         "indexed": false,
@@ -619,7 +603,8 @@
         "internalType": "uint256",
         "name": "minWithdrawLockPeriodAfterStake_",
         "type": "uint256"
-      }
+      },
+      { "internalType": "address", "name": "buildersV3_", "type": "address" }
     ],
     "name": "BuilderSubnets_init",
     "outputs": [],
@@ -642,7 +627,23 @@
   },
   {
     "inputs": [],
-    "name": "buildersPoolData",
+    "name": "allSubnetsData",
+    "outputs": [
+      { "internalType": "uint256", "name": "staked", "type": "uint256" },
+      { "internalType": "uint256", "name": "virtualStaked", "type": "uint256" },
+      { "internalType": "uint256", "name": "rate", "type": "uint256" },
+      {
+        "internalType": "uint128",
+        "name": "lastCalculatedTimestamp",
+        "type": "uint128"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "buildersRewardPoolData",
     "outputs": [
       { "internalType": "uint256", "name": "initialAmount", "type": "uint256" },
       {
@@ -657,54 +658,9 @@
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "bytes32", "name": "subnetId", "type": "bytes32" }
-    ],
-    "name": "buildersSubnets",
-    "outputs": [
-      { "internalType": "string", "name": "name", "type": "string" },
-      { "internalType": "address", "name": "owner", "type": "address" },
-      { "internalType": "uint256", "name": "minStake", "type": "uint256" },
-      { "internalType": "uint256", "name": "fee", "type": "uint256" },
-      { "internalType": "address", "name": "feeTreasury", "type": "address" },
-      { "internalType": "uint128", "name": "startsAt", "type": "uint128" },
-      {
-        "internalType": "uint128",
-        "name": "withdrawLockPeriodAfterStake",
-        "type": "uint128"
-      },
-      {
-        "internalType": "uint128",
-        "name": "maxClaimLockEnd",
-        "type": "uint128"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "bytes32", "name": "subnetId", "type": "bytes32" }
-    ],
-    "name": "buildersSubnetsData",
-    "outputs": [
-      { "internalType": "uint256", "name": "staked", "type": "uint256" },
-      { "internalType": "uint256", "name": "virtualStaked", "type": "uint256" }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "bytes32", "name": "subnetId", "type": "bytes32" }
-    ],
-    "name": "buildersSubnetsMetadata",
-    "outputs": [
-      { "internalType": "string", "name": "slug", "type": "string" },
-      { "internalType": "string", "name": "description", "type": "string" },
-      { "internalType": "string", "name": "website", "type": "string" },
-      { "internalType": "string", "name": "image", "type": "string" }
-    ],
+    "inputs": [],
+    "name": "buildersV3",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -719,15 +675,7 @@
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "bytes32", "name": "subnetId_", "type": "bytes32" },
-      {
-        "internalType": "address",
-        "name": "stakerAddress_",
-        "type": "address"
-      },
-      { "internalType": "uint128", "name": "to_", "type": "uint128" }
-    ],
+    "inputs": [{ "internalType": "uint128", "name": "to_", "type": "uint128" }],
     "name": "collectPendingRewards",
     "outputs": [],
     "stateMutability": "nonpayable",
@@ -758,7 +706,7 @@
             "type": "uint128"
           }
         ],
-        "internalType": "struct IBuilderSubnets.BuildersSubnet",
+        "internalType": "struct IBuilderSubnets.Subnet",
         "name": "subnet_",
         "type": "tuple"
       },
@@ -769,7 +717,7 @@
           { "internalType": "string", "name": "website", "type": "string" },
           { "internalType": "string", "name": "image", "type": "string" }
         ],
-        "internalType": "struct IBuilderSubnets.BuildersSubnetMetadata",
+        "internalType": "struct IBuilderSubnets.SubnetMetadata",
         "name": "metadata_",
         "type": "tuple"
       }
@@ -789,7 +737,7 @@
           { "internalType": "string", "name": "website", "type": "string" },
           { "internalType": "string", "name": "image", "type": "string" }
         ],
-        "internalType": "struct IBuilderSubnets.BuildersSubnetMetadata",
+        "internalType": "struct IBuilderSubnets.SubnetMetadata",
         "name": "metadata_",
         "type": "tuple"
       }
@@ -861,12 +809,7 @@
   {
     "inputs": [
       { "internalType": "bytes32", "name": "subnetId_", "type": "bytes32" },
-      {
-        "internalType": "address",
-        "name": "stakerAddress_",
-        "type": "address"
-      },
-      { "internalType": "uint128", "name": "to_", "type": "uint128" }
+      { "internalType": "address", "name": "stakerAddress_", "type": "address" }
     ],
     "name": "getStakerRewards",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
@@ -923,6 +866,24 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "bytes32[]",
+        "name": "subnetIds_",
+        "type": "bytes32[]"
+      },
+      {
+        "internalType": "address[]",
+        "name": "stakerAddresses_",
+        "type": "address[]"
+      }
+    ],
+    "name": "resetPowerFactor",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "rewardCalculationStartsAt",
     "outputs": [{ "internalType": "uint128", "name": "", "type": "uint128" }],
@@ -950,12 +911,12 @@
           },
           { "internalType": "uint128", "name": "interval", "type": "uint128" }
         ],
-        "internalType": "struct IBuilderSubnets.BuildersPoolData",
-        "name": "buildersPoolData_",
+        "internalType": "struct IBuilderSubnets.BuildersRewardPoolData",
+        "name": "buildersRewardPoolData_",
         "type": "tuple"
       }
     ],
-    "name": "setBuildersPoolData",
+    "name": "setBuildersRewardPoolData",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1105,16 +1066,16 @@
     ],
     "name": "stakers",
     "outputs": [
-      {
-        "internalType": "uint128",
-        "name": "lastInteraction",
-        "type": "uint128"
-      },
-      { "internalType": "uint128", "name": "lastStake", "type": "uint128" },
-      { "internalType": "uint128", "name": "claimLockEnd", "type": "uint128" },
       { "internalType": "uint256", "name": "staked", "type": "uint256" },
       { "internalType": "uint256", "name": "virtualStaked", "type": "uint256" },
-      { "internalType": "uint256", "name": "pendingRewards", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "pendingRewards",
+        "type": "uint256"
+      },
+      { "internalType": "uint256", "name": "rate", "type": "uint256" },
+      { "internalType": "uint128", "name": "lastStake", "type": "uint128" },
+      { "internalType": "uint128", "name": "claimLockEnd", "type": "uint128" }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -1135,6 +1096,58 @@
   },
   {
     "inputs": [
+      { "internalType": "bytes32", "name": "subnetId", "type": "bytes32" }
+    ],
+    "name": "subnets",
+    "outputs": [
+      { "internalType": "string", "name": "name", "type": "string" },
+      { "internalType": "address", "name": "owner", "type": "address" },
+      { "internalType": "uint256", "name": "minStake", "type": "uint256" },
+      { "internalType": "uint256", "name": "fee", "type": "uint256" },
+      { "internalType": "address", "name": "feeTreasury", "type": "address" },
+      { "internalType": "uint128", "name": "startsAt", "type": "uint128" },
+      {
+        "internalType": "uint128",
+        "name": "withdrawLockPeriodAfterStake",
+        "type": "uint128"
+      },
+      {
+        "internalType": "uint128",
+        "name": "maxClaimLockEnd",
+        "type": "uint128"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "bytes32", "name": "subnetId", "type": "bytes32" }
+    ],
+    "name": "subnetsData",
+    "outputs": [
+      { "internalType": "uint256", "name": "staked", "type": "uint256" },
+      { "internalType": "uint256", "name": "virtualStaked", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "bytes32", "name": "subnetId", "type": "bytes32" }
+    ],
+    "name": "subnetsMetadata",
+    "outputs": [
+      { "internalType": "string", "name": "slug", "type": "string" },
+      { "internalType": "string", "name": "description", "type": "string" },
+      { "internalType": "string", "name": "website", "type": "string" },
+      { "internalType": "string", "name": "image", "type": "string" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
       { "internalType": "bytes4", "name": "interfaceId_", "type": "bytes4" }
     ],
     "name": "supportsInterface",
@@ -1146,20 +1159,6 @@
     "inputs": [],
     "name": "token",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "totalStaked",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "totalVirtualStaked",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
