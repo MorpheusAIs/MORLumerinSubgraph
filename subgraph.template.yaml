@@ -4,58 +4,58 @@ indexerHints:
 schema:
   file: ./schema.graphql
 dataSources:
-  - kind: ethereum
-    name: ProviderRegistry
-    network: "{{ network }}"
-    source:
-      address: "{{ providerRegistry }}"
-      abi: ProviderRegistry
-      startBlock: {{ providerRegistryStartBlock }}
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      entities:
-        - Provider
-      abis:
-        - name: ProviderRegistry
-          file: ./abis/ProviderRegistry.json
-      eventHandlers:
-        - event: ProviderRegistered(indexed address)
-          handler: handleProviderRegisteredEvent
-        - event: ProviderDeregistered(indexed address)
-          handler: handleProviderDeregisteredEvent
-      file: ./src/mappings/provider-registry.ts
+  # - kind: ethereum
+  #   name: ProviderRegistry
+  #   network: "{{ network }}"
+  #   source:
+  #     address: "{{ providerRegistry }}"
+  #     abi: ProviderRegistry
+  #     startBlock: {{ providerRegistryStartBlock }}
+  #   mapping:
+  #     kind: ethereum/events
+  #     apiVersion: 0.0.7
+  #     language: wasm/assemblyscript
+  #     entities:
+  #       - Provider
+  #     abis:
+  #       - name: ProviderRegistry
+  #         file: ./abis/ProviderRegistry.json
+  #     eventHandlers:
+  #       - event: ProviderRegistered(indexed address)
+  #         handler: handleProviderRegisteredEvent
+  #       - event: ProviderDeregistered(indexed address)
+  #         handler: handleProviderDeregisteredEvent
+  #     file: ./src/mappings/provider-registry.ts
   
-  - kind: ethereum
-    name: DelegateFactory
-    network: "{{ network }}"
-    source:
-      address: "{{ delegateFactory }}"
-      abi: DelegateFactory
-      startBlock: {{ delegateFactoryStartBlock }}
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      entities:
-        - Subnet
-      abis:
-        - name: DelegateFactory
-          file: ./abis/DelegateFactory.json
-        - name: ProvidersDelegate
-          file: ./abis/ProvidersDelegate.json
-      eventHandlers:
-        - event: ProxyDeployed(indexed address)
-          handler: handleProxyDeployed
-      file: ./src/mappings/delegator-factory.ts
+  # - kind: ethereum
+  #   name: DelegateFactory
+  #   network: "{{ network }}"
+  #   source:
+  #     address: "{{ delegateFactory }}"
+  #     abi: DelegateFactory
+  #     startBlock: {{ delegateFactoryStartBlock }}
+  #   mapping:
+  #     kind: ethereum/events
+  #     apiVersion: 0.0.7
+  #     language: wasm/assemblyscript
+  #     entities:
+  #       - Subnet
+  #     abis:
+  #       - name: DelegateFactory
+  #         file: ./abis/DelegateFactory.json
+  #       - name: ProvidersDelegate
+  #         file: ./abis/ProvidersDelegate.json
+  #     eventHandlers:
+  #       - event: ProxyDeployed(indexed address)
+  #         handler: handleProxyDeployed
+  #     file: ./src/mappings/delegator-factory.ts
 
   - kind: ethereum
-    name: BuilderSubnets
+    name: BuildersV4
     network: "{{ network }}"
     source:
       address: "{{ builders }}"
-      abi: BuilderSubnets
+      abi: BuildersV4
       startBlock: {{ buildersStartBlock }}
     mapping:
       kind: ethereum/events
@@ -64,55 +64,47 @@ dataSources:
       entities:
         - Builder
       abis:
-        - name: BuilderSubnets
-          file: ./abis/BuilderSubnets.json
+        - name: BuildersV4
+          file: ./abis/BuildersV4.json
       eventHandlers:
-        - event: SubnetEdited(indexed bytes32,(string,address,uint256,uint256,address,uint128,uint128,uint128))
+        - event: SubnetCreated(indexed bytes32,(string,address,uint128,uint128,uint128,uint256,address))
+          handler: handleSubnetCreated
+        - event: SubnetEdited(indexed bytes32,(string,address,uint128,uint128,uint128,uint256,address))
           handler: handleSubnetEdited
-        - event: SubnetFeeTreasurySet(bytes32,address,address)
-          handler: handleSubnetFeeTreasurySet
         - event: SubnetMetadataEdited(indexed bytes32,(string,string,string,string))
           handler: handleSubnetMetadataEdited
-        - event: SubnetMinStakeSet(bytes32,uint256,uint256)
-          handler: handleSubnetMinStakeSet
-        - event: SubnetOwnerSet(bytes32,address,address)
-          handler: handleSubnetOwnerSet
-        - event: SubnetMaxClaimLockEndSet(bytes32,uint128,uint128)
-          handler: handleSubnetMaxClaimLockEndSet
-        - event: Staked(indexed bytes32,address,(uint256,uint256,uint256,uint256,uint128,uint128))
-          handler: handleStaked
-        - event: Claimed(indexed bytes32,address,(uint256,uint256,uint256,uint256,uint128,uint128),uint256)
-          handler: handleClaimed
-        - event: Withdrawn(indexed bytes32,address,(uint256,uint256,uint256,uint256,uint128,uint128),uint256)
-          handler: handleWithdrawn
-        - event: FeePaid(indexed bytes32,address,uint256,address)
-          handler: handleFeePaid
-      file: ./src/mappings/builder-subnets.ts
+        - event: UserDeposited(indexed bytes32,indexed address,uint256)
+          handler: handleUserDeposited
+        - event: UserWithdrawn(indexed bytes32,indexed address,uint256)
+          handler: handleUserWithdrawn
+        - event: AdminClaimed(indexed bytes32,address,uint256)
+          handler: handleAdminClaimed
+      file: ./src/mappings/builders-v4.ts
 
-templates:
-  - kind: ethereum/contract
-    name: ProvidersDelegate
-    network: "{{ network }}"
-    source:
-      abi: ProvidersDelegate
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      entities:
-        - Subnet
-        - SubnetUser
-      abis:
-        - name: ProvidersDelegate
-          file: ./abis/ProvidersDelegate.json
-      eventHandlers:
-        - event: NameUpdated(string)
-          handler: handleNameUpdated
-        - event: EndpointUpdated(string)
-          handler: handleEndpointUpdated
-        - event: Staked(address,uint256,uint256,uint256)
-          handler: handleStaked
-        - event: Claimed(address,uint256,uint256)
-          handler: handleClaimed
-      file: ./src/mappings/providers-delegator.ts
+# templates:
+#   - kind: ethereum/contract
+#     name: ProvidersDelegate
+#     network: "{{ network }}"
+#     source:
+#       abi: ProvidersDelegate
+#     mapping:
+#       kind: ethereum/events
+#       apiVersion: 0.0.7
+#       language: wasm/assemblyscript
+#       entities:
+#         - Subnet
+#         - SubnetUser
+#       abis:
+#         - name: ProvidersDelegate
+#           file: ./abis/ProvidersDelegate.json
+#       eventHandlers:
+#         - event: NameUpdated(string)
+#           handler: handleNameUpdated
+#         - event: EndpointUpdated(string)
+#           handler: handleEndpointUpdated
+#         - event: Staked(address,uint256,uint256,uint256)
+#           handler: handleStaked
+#         - event: Claimed(address,uint256,uint256)
+#           handler: handleClaimed
+#       file: ./src/mappings/providers-delegator.ts
 

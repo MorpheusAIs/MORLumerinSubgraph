@@ -1,0 +1,9 @@
+{
+    "network": "base-sepolia",
+    "providerRegistry": "0x0000000000000000000000000000000000000000",
+    "providerRegistryStartBlock": "0x0000000000000000000000000000000000000000",
+    "delegateFactory": "0x0000000000000000000000000000000000000000",
+    "delegateFactoryStartBlock": "0x0000000000000000000000000000000000000000",
+    "builders": "0x6C3401D71CEd4b4fEFD1033EA5F83e9B3E7e4381",
+    "buildersStartBlock": "29016940"
+}

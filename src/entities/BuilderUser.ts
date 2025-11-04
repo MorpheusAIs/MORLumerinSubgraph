@@ -10,10 +10,7 @@ export function getBuilderUser(user: Bytes, builderSubnetId: Bytes): BuilderUser
 
     entity.address = user;
     entity.builderSubnet = builderSubnetId;
-    entity.staked = BigInt.zero();
-    entity.claimed = BigInt.zero();
-    entity.claimLockEnd = BigInt.zero();
-    entity.lastStake = BigInt.zero();
+    entity.deposited = BigInt.zero();
   }
 
   return entity;

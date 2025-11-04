@@ -8,13 +8,10 @@ export function getBuilderSubnet(id: Bytes): BuilderSubnet {
     entity = new BuilderSubnet(id);
 
     entity.name = "";
-    entity.owner = Bytes.empty();
-    entity.minStake = BigInt.zero()
-    entity.fee = BigInt.zero()
-    entity.feeTreasury = Bytes.empty();
-    entity.startsAt = BigInt.zero()
-    entity.withdrawLockPeriodAfterStake = BigInt.zero()
-    entity.maxClaimLockEnd = BigInt.zero();
+    entity.admin = Bytes.empty();
+    entity.claimAdmin = Bytes.empty();
+    entity.minimalDeposit = BigInt.zero()
+    entity.withdrawLockPeriodAfterDeposit = BigInt.zero()
   
     entity.slug = "";
     entity.description = "";

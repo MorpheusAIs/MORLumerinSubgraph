@@ -11,6 +11,7 @@
     "prepare:arbitrum-mainnet": "mustache config/arbitrum-mainnet.json subgraph.template.yaml > subgraph.yaml",
     "prepare:arbitrum-sepolia": "mustache config/arbitrum-sepolia.json subgraph.template.yaml > subgraph.yaml",
     "prepare:base-mainnet": "mustache config/base-mainnet.json subgraph.template.yaml > subgraph.yaml",
+    "prepare:base-sepolia": "mustache config/base-sepolia.json subgraph.template.yaml > subgraph.yaml",
     "deploy:arbitrum-mainnet": "npm run prepare:arbitrum-mainnet && npm run compile && npx graph deploy lumerin-node",
     "deploy:arbitrum-sepolia": "npm run prepare:arbitrum-sepolia && npm run compile && npx graph deploy morpheus-arbitrum-sepolia",
     "deploy:base-mainnet": "npm run prepare:base-mainnet && npm run compile && npx graph deploy morpheus-base-mainnet",

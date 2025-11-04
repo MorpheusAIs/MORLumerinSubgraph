@@ -36,13 +36,10 @@ type SubnetUser @entity {
 type BuilderSubnet @entity {
   id: Bytes!
   name: String!
-  owner: Bytes!
-  minStake: BigInt!
-  fee: BigInt!
-  feeTreasury: Bytes!
-  startsAt: BigInt!
-  withdrawLockPeriodAfterStake: BigInt!
-  maxClaimLockEnd: BigInt!
+  admin: Bytes!
+  claimAdmin: Bytes!
+  minimalDeposit: BigInt!
+  withdrawLockPeriodAfterDeposit: BigInt!
 
   # Metadata 
   slug: String!
@@ -62,14 +59,11 @@ type BuilderUser @entity {
   id: Bytes!
   address: Bytes!
   builderSubnet: BuilderSubnet!
-  staked: BigInt!
-  claimed: BigInt!
-  claimLockEnd: BigInt!
-  lastStake: BigInt!
+  deposited: BigInt!
 }
 
 type Counter @entity {
   id: Bytes!
   totalSubnets: BigInt!
-  totalBuilderProjects: BigInt!
+  totalBuilderSubnets: BigInt!
 }
