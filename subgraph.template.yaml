@@ -51,11 +51,11 @@ dataSources:
   #     file: ./src/mappings/delegator-factory.ts
 
   - kind: ethereum
-    name: BuildersV4
+    name: Builders
     network: "{{ network }}"
     source:
       address: "{{ builders }}"
-      abi: BuildersV4
+      abi: Builders
       startBlock: {{ buildersStartBlock }}
     mapping:
       kind: ethereum/events
@@ -64,9 +64,15 @@ dataSources:
       entities:
         - Builder
       abis:
-        - name: BuildersV4
-          file: ./abis/BuildersV4.json
+        - name: Builders
+          file: ./abis/Builders.json
       eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+        - event: BuilderPoolCreated(indexed bytes32,(string,address,uint128,uint128,uint128,uint256))
+          handler: handleBuilderPoolCreated
+        - event: BuilderPoolEdited(indexed bytes32,(string,address,uint128,uint128,uint128,uint256))
+          handler: handleBuilderPoolEdited
         - event: SubnetCreated(indexed bytes32,(string,address,uint128,uint128,uint128,uint256,address))
           handler: handleSubnetCreated
         - event: SubnetEdited(indexed bytes32,(string,address,uint128,uint128,uint128,uint256,address))
@@ -79,7 +85,7 @@ dataSources:
           handler: handleUserWithdrawn
         - event: AdminClaimed(indexed bytes32,address,uint256)
           handler: handleAdminClaimed
-      file: ./src/mappings/builders-v4.ts
+      file: ./src/mappings/builders.ts
 
 # templates:
 #   - kind: ethereum/contract

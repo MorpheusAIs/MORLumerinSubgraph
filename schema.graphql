@@ -1,3 +1,11 @@
+type Upgraded @entity(immutable: true) {
+  id: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+  implementation: Bytes!
+}
+
 type Provider @entity {
   id: Bytes!
   endpoint: String!
