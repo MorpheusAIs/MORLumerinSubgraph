@@ -1,17 +1,19 @@
 import { Bytes, BigInt } from "@graphprotocol/graph-ts";
-import { BuilderSubnet } from "../../generated/schema";
+import { BuildersProject } from "../../generated/schema";
 
-export function getBuilderSubnet(id: Bytes): BuilderSubnet {
-  let entity = BuilderSubnet.load(id);
+export function getBuildersProject(id: Bytes): BuildersProject {
+  let entity = BuildersProject.load(id);
 
   if (entity == null) {
-    entity = new BuilderSubnet(id);
+    entity = new BuildersProject(id);
 
     entity.name = "";
     entity.admin = Bytes.empty();
     entity.claimAdmin = Bytes.empty();
+    entity.startsAt = BigInt.zero();
     entity.minimalDeposit = BigInt.zero()
     entity.withdrawLockPeriodAfterDeposit = BigInt.zero()
+    entity.claimLockEnd = BigInt.zero();
   
     entity.slug = "";
     entity.description = "";

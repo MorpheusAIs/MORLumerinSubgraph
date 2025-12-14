@@ -41,13 +41,15 @@ type SubnetUser @entity {
   address: Bytes!
 }
 
-type BuilderSubnet @entity {
+type BuildersProject @entity {
   id: Bytes!
   name: String!
   admin: Bytes!
   claimAdmin: Bytes!
+  startsAt: BigInt!
   minimalDeposit: BigInt!
   withdrawLockPeriodAfterDeposit: BigInt!
+  claimLockEnd: BigInt!
 
   # Metadata 
   slug: String!
@@ -59,19 +61,20 @@ type BuilderSubnet @entity {
   totalStaked: BigInt!
   totalClaimed: BigInt!
   totalUsers: BigInt!
-  builderUsers: [BuilderUser!]! @derivedFrom(field: "builderSubnet")
+  builderUsers: [BuildersUser!]! @derivedFrom(field: "buildersProject")
 }
 
-type BuilderUser @entity {
+type BuildersUser @entity {
   # User address in Bytes + BuildersProject ID
   id: Bytes!
   address: Bytes!
-  builderSubnet: BuilderSubnet!
-  deposited: BigInt!
+  buildersProject: BuildersProject!
+  staked: BigInt!
+  lastStake: BigInt!
 }
 
 type Counter @entity {
   id: Bytes!
   totalSubnets: BigInt!
-  totalBuilderSubnets: BigInt!
+  totalBuildersProjects: BigInt!
 }
